@@ -22,8 +22,7 @@ using namespace std;
 class BigDecimalInt{
 private:
     string number;
-    char sign;
-    void setNumber(string num);
+    char signNumber;
     bool checkValidInput(string input);
 
 public:
@@ -35,17 +34,18 @@ public:
     BigDecimalInt operator - (BigDecimalInt anotherDec);
     friend ostream &operator << (ostream &out, BigDecimalInt num);
     int size();
-    int Sign();
-    void push_back(char ch);
-    void push_front(char ch);
+    int sign();
+    void setNumber(string num);
+    string getNumber(){
+        return number;
+    }
+
     BigDecimalInt(){}
     BigDecimalInt(string num)
     {
         setNumber(num);
     }
-    string getnum(){
-        return number;
-    }
+
 };
 
 #endif //BIGDECIMALINT_BIGDECIMALINTCLASS_H
