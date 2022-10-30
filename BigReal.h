@@ -10,7 +10,7 @@ using namespace std;
 
 class BigReal {
 private:
-    BigDecimalInt integer;
+    BigDecimalInt whole;
     BigDecimalInt decimal;
 public:
     BigReal (double realNumber = 0.0); // Default constructor
