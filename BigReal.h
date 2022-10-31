@@ -1,6 +1,16 @@
-//
-// Created by Selsabeel on 2022-10-28.
-//
+/*
+Author1: Selsabeel Asim Ali Elbagir
+ID1: 20210714
+Author2:
+ID2:
+Author3:
+ID3:
+Section: S9/S10
+TA: 
+Professor: Dr.El-Ramly
+Course: Object Oriented Programming
+Description: 
+*/
 
 #ifndef UNTITLED2_BIGREAL_H
 #define UNTITLED2_BIGREAL_H
@@ -10,7 +20,7 @@ using namespace std;
 
 class BigReal {
 private:
-    BigDecimalInt whole;
+    BigDecimalInt integer;
     BigDecimalInt decimal;
 public:
     BigReal (double realNumber = 0.0); // Default constructor
