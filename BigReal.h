@@ -22,6 +22,7 @@ class BigReal {
 private:
     BigDecimalInt integer;
     BigDecimalInt decimal;
+    char signNumber;
 public:
     BigReal (double realNumber = 0.0); // Default constructor
     BigReal (string realNumber);
