@@ -1,8 +1,8 @@
 /*
 Author1: Selsabeel Asim Ali Elbagir
 ID1: 20210714
-Author2:
-ID2:
+Author2: Salma Abdelaziz Nabieh Soliman
+ID2: 20211048
 Author3:
 ID3:
 Section: S9/S10
@@ -32,13 +32,13 @@ public:
     BigReal& operator= (BigReal&& other); // Move assignment*/
     BigReal operator+ (BigReal& other);
     BigReal operator- (BigReal& other);
-    //bool operator< (BigReal anotherReal);
-    //bool operator> (BigReal anotherReal);
-    //bool operator== (BigReal anotherReal);
+    bool operator< (BigReal anotherReal);
+    bool operator> (BigReal anotherReal);
+    bool operator== (BigReal anotherReal);
     int size();
-    int Sign();
-    //friend ostream& operator << (ostream& out, BigReal num);
-    //friend istream& operator >> (istream& out, BigReal num);
+    int sign();
+    friend ostream& operator << (ostream& out, BigReal num);
+    friend istream& operator >> (istream& out, BigReal num);
 };
 
 #endif //UNTITLED2_BIGREAL_H
