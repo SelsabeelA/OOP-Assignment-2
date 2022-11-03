@@ -1,6 +1,80 @@
 #include "BigReal.h"
 
 //Write your method functions here :)
+
+
+
+void add_zeroes(string& temporaryDecimal, string& temporaryOtherDecimal){
+    if (temporaryDecimal.size() != temporaryOtherDecimal.size()){
+        while(temporaryDecimal.size() > temporaryOtherDecimal.size()){
+            temporaryOtherDecimal += "0";
+        }
+        while(temporaryOtherDecimal.size() > temporaryDecimal.size()){
+            temporaryDecimal += "0";
+        }
+    }
+}
+
+
+
+BigReal BigReal::operator+ (BigReal& other){
+    BigReal result;
+    string temporaryDecimal = decimal.getNumber();
+    string temporaryOtherDecimal = other.decimal.getNumber();
+    add_zeroes(temporaryDecimal, temporaryOtherDecimal);
+
+    string temporaryInteger = integer.getNumber();
+    string temporaryOtherInteger = other.integer.getNumber();
+
+    BigDecimalInt temp1(temporaryInteger+temporaryDecimal);
+    BigDecimalInt temp2(temporaryOtherInteger+temporaryOtherDecimal);
+
+    string forpushingback = "";
+
+    BigDecimalInt sum(temp1+temp2);
+    string string_sum = sum.getNumber();
+    int i =0;
+    for(i;i<temporaryInteger.size();i++){
+        forpushingback += string_sum[i];
+    }
+    result.integer = forpushingback;
+    forpushingback = "";
+    for(int j=i;j<(i+temporaryDecimal.size());j++){
+        forpushingback += string_sum[j];
+    }
+    result.decimal = forpushingback;
+}
+
+
+BigReal BigReal::operator-(BigReal &other) {
+    BigReal result;
+    string temporaryDecimal = decimal.getNumber();
+    string temporaryOtherDecimal = other.decimal.getNumber();
+    add_zeroes(temporaryDecimal, temporaryOtherDecimal);
+
+    string temporaryInteger = integer.getNumber();
+    string temporaryOtherInteger = other.integer.getNumber();
+
+    BigDecimalInt temp1(temporaryInteger+temporaryDecimal);
+    BigDecimalInt temp2(temporaryOtherInteger+temporaryOtherDecimal);
+
+    string forpushingback = "";
+
+    BigDecimalInt sum(temp1-temp2);
+    string string_sum = sum.getNumber();
+    int i =0;
+    for(i;i<temporaryInteger.size();i++){
+        forpushingback += string_sum[i];
+    }
+    result.integer = forpushingback;
+    forpushingback = "";
+    for(int j=i;j<(i+temporaryDecimal.size());j++){
+        forpushingback += string_sum[j];
+    }
+    result.decimal = forpushingback;
+}
+
+
 //constructor
 BigReal :: BigReal (string realNumber) {
     if(realNumber[0] == '-'){
