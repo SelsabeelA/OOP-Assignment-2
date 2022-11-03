@@ -1,15 +1,99 @@
 #include "BigReal.h"
 
-//Write your method functions here :)
+BigReal ::BigReal(double realnumber) {
+    string n = to_string(realnumber), Int = "", frac = "";
+    if (n[0] == '+' || n[0] == '-') {
+        signNumber = n[0];
+        n.erase(0);
+    }
+    int i = 0;
+    while ((i < n.size()) && (n[i] != '.')) {
+        Int += n[i];
+        i++;
+    }
+    i++;
+    while (i < n.size()) {
+        frac += n[i];
+        i++;
+    }
+    *integer = Int;
+    *fraction = frac;
+}
+BigReal::BigReal(string realnumber) {
+    regex validInput("[-+]?[0-9]*[\.]?[0-9]*");
+    if (!regex_match(realnumber, validInput)) {
+        cout << "Invalid input\n";
+        exit(1);
+    }
+    if (realnumber[0] == '+' || realnumber[0] == '-') {
+        signNumber = realnumber[0];
+        realnumber.erase(0);
+    }
+    string Int = "", frac = "";
+    int i = 0;
+    while ((i < realnumber.size()) && (realnumber[i] != '.')) {
+        Int += realnumber[i];
+        i++;
+    }
+    i++;
+    while (i < realnumber.size()) {
+        frac += realnumber[i];
+        i++;
+    }
+    if (Int.size() == 0) {
+        Int = "0";
+    }
+}
+
+BigReal::BigReal(BigDecimalInt bigInteger) {
+    if (bigInteger.Sign())
+        signNumber = '+';
+    else
+        signNumber = '-';
+    *integer = bigInteger;
+    BigDecimalInt frac("0");
+    *fraction = frac;
+}
+
+BigReal::BigReal(const BigReal& other) {
+    signNumber = other.signNumber;
+    *integer = *other.integer;
+    *fraction = *other.fraction;
+}
+
+BigReal::BigReal(BigReal&& other) {      //  Move constructor
+    signNumber = other.signNumber;
+    integer = other.integer;
+    fraction = other.fraction;
+    other.integer = nullptr;
+    other.fraction = nullptr;
+}
+BigReal& BigReal:: operator= (BigReal& other) {
+    signNumber = other.signNumber;
+    *integer = *other.integer;
+    *fraction = *other.fraction;
+    return *this;
+}
+
+BigReal& BigReal:: operator=(BigReal&& other)
+{
+    signNumber = other.signNumber;
+    integer = other.integer;
+    fraction = other.fraction; 
+    other.integer = nullptr;
+    other.fraction = nullptr;
+    return *this;
+}
+ 
 
 
 
-void add_zeroes(string& temporaryDecimal, string& temporaryOtherDecimal){
-    if (temporaryDecimal.size() != temporaryOtherDecimal.size()){
-        while(temporaryDecimal.size() > temporaryOtherDecimal.size()){
+void add_zeroes(string& temporaryDecimal, string& temporaryOtherDecimal) {
+    if (temporaryDecimal.size() != temporaryOtherDecimal.size()) {
+        while (temporaryDecimal.size() > temporaryOtherDecimal.size()) {
             temporaryOtherDecimal += "0";
         }
-        while(temporaryOtherDecimal.size() > temporaryDecimal.size()){
+        while (temporaryOtherDecimal.size() > temporaryDecimal.size()) {
             temporaryDecimal += "0";
         }
     }
@@ -17,89 +101,79 @@ void add_zeroes(string& temporaryDecimal, string& temporaryOtherDecimal){
 
 
 
-BigReal BigReal::operator+ (BigReal& other){
+BigReal BigReal::operator+ (BigReal& other) {
     BigReal result;
-    string temporaryDecimal = decimal.getNumber();
-    string temporaryOtherDecimal = other.decimal.getNumber();
+    string temporaryDecimal = fraction->getNumber();
+    string temporaryOtherDecimal = other.fraction->getNumber();
     add_zeroes(temporaryDecimal, temporaryOtherDecimal);
 
-    string temporaryInteger = integer.getNumber();
-    string temporaryOtherInteger = other.integer.getNumber();
+    string temporaryInteger = integer->getNumber();
+    string temporaryOtherInteger = other.integer->getNumber();
 
-    BigDecimalInt temp1(temporaryInteger+temporaryDecimal);
-    BigDecimalInt temp2(temporaryOtherInteger+temporaryOtherDecimal);
+    BigDecimalInt temp1(temporaryInteger + temporaryDecimal);
+    BigDecimalInt temp2(temporaryOtherInteger + temporaryOtherDecimal);
 
     string forpushingback = "";
 
-    BigDecimalInt sum(temp1+temp2);
-    string string_sum = sum.getNumber();
-    int i =0;
-    for(i;i<temporaryInteger.size();i++){
+    BigDecimalInt sum(temp1 + temp2);
+    string string_sum = sum.getNumber();;
+    int i = 0;
+    for (i; i < temporaryInteger.size(); i++) {
         forpushingback += string_sum[i];
     }
-    result.integer = forpushingback;
+    result.integer = new BigDecimalInt (forpushingback);
     forpushingback = "";
-    for(int j=i;j<(i+temporaryDecimal.size());j++){
+    for (int j = i; j < (i + temporaryDecimal.size()); j++) {
         forpushingback += string_sum[j];
     }
-    result.decimal = forpushingback;
+    result.fraction = new BigDecimalInt (forpushingback);
+    return result;
 }
 
 
-BigReal BigReal::operator-(BigReal &other) {
+BigReal BigReal::operator-(BigReal& other) {
     BigReal result;
-    string temporaryDecimal = decimal.getNumber();
-    string temporaryOtherDecimal = other.decimal.getNumber();
+    string temporaryDecimal = fraction->getNumber();
+    string temporaryOtherDecimal = other.fraction->getNumber();
     add_zeroes(temporaryDecimal, temporaryOtherDecimal);
 
-    string temporaryInteger = integer.getNumber();
-    string temporaryOtherInteger = other.integer.getNumber();
+    string temporaryInteger = integer->getNumber();
+    string temporaryOtherInteger = other.integer->getNumber();;
 
-    BigDecimalInt temp1(temporaryInteger+temporaryDecimal);
-    BigDecimalInt temp2(temporaryOtherInteger+temporaryOtherDecimal);
+    BigDecimalInt temp1(temporaryInteger + temporaryDecimal);
+    BigDecimalInt temp2(temporaryOtherInteger + temporaryOtherDecimal);
 
     string forpushingback = "";
 
-    BigDecimalInt sum(temp1-temp2);
+    BigDecimalInt sum(temp1 - temp2);
     string string_sum = sum.getNumber();
-    int i =0;
-    for(i;i<temporaryInteger.size();i++){
+    int i = 0;
+    for (i; i < temporaryInteger.size(); i++) {
         forpushingback += string_sum[i];
     }
-    result.integer = forpushingback;
+    result.integer = new BigDecimalInt(forpushingback);
     forpushingback = "";
-    for(int j=i;j<(i+temporaryDecimal.size());j++){
+    for (int j = i; j < (i + temporaryDecimal.size()); j++) {
         forpushingback += string_sum[j];
     }
-    result.decimal = forpushingback;
+    result.fraction = new BigDecimalInt(forpushingback);
+    return result;
 }
 
-
-//constructor
-BigReal :: BigReal (string realNumber) {
-    if(realNumber[0] == '-'){
-        signNumber = '-';
-    }
-    else{
-        signNumber = '+';
-    }
-    integer.setNumber(realNumber.substr(0, realNumber.find('.')));
-    decimal.setNumber(realNumber.substr(realNumber.find('.') + 1, realNumber.length()));
-}
 //operator < overloading function.
 bool BigReal :: operator < (BigReal anotherReal) {
-    if (integer < anotherReal.integer)
+    if (*integer < *anotherReal.integer)
         return true;
-    else if (integer == anotherReal.integer) {
-        string s1 = decimal.getNumber();
-        string s2 = anotherReal.decimal.getNumber();
-        if(s1.size() > s2.size()) {
+    else if (*integer == *anotherReal.integer) {
+        string s1 = fraction->getNumber();
+        string s2 = anotherReal.fraction->getNumber();
+        if (s1.size() > s2.size()) {
             int diff = s1.length() - s2.length();
             for (int i = 0; i < diff; i++) {
                 s2 += '0';
             }
         }
-        else if(s1.size() < s2.size()) {
+        else if (s1.size() < s2.size()) {
             int diff = s2.length() - s1.length();
             for (int i = 0; i < diff; i++) {
                 s1 += '0';
@@ -113,19 +187,19 @@ bool BigReal :: operator < (BigReal anotherReal) {
 
 //operator > overloading function.
 bool BigReal :: operator > (BigReal anotherReal) {
-    if (integer > anotherReal.integer) {
+    if (*integer > *anotherReal.integer) {
         return true;
     }
-    else if (integer == anotherReal.integer) {
-        string s1 = decimal.getNumber();
-        string s2 = anotherReal.decimal.getNumber();
-        if(s1.size() > s2.size()) {
+    else if (*integer == *anotherReal.integer) {
+        string s1 = fraction->getNumber();
+        string s2 = anotherReal.fraction->getNumber();
+        if (s1.size() > s2.size()) {
             int diff = s1.length() - s2.length();
             for (int i = 0; i < diff; i++) {
                 s2 += '0';
             }
         }
-        else if(s1.size() < s2.size()) {
+        else if (s1.size() < s2.size()) {
             int diff = s2.length() - s1.length();
             for (int i = 0; i < diff; i++) {
                 s1 += '0';
@@ -139,34 +213,34 @@ bool BigReal :: operator > (BigReal anotherReal) {
 //operator == overloading function.
 bool BigReal :: operator == (BigReal anotherReal)
 {
-    string s1 = decimal.getNumber();
-    string s2 = anotherReal.decimal.getNumber();
-    if(s1.size() > s2.size()) {
+    string s1 = fraction->getNumber();
+    string s2 = anotherReal.fraction->getNumber();
+    if (s1.size() > s2.size()) {
         int diff = s1.length() - s2.length();
         for (int i = 0; i < diff; i++) {
             s2 += '0';
         }
     }
-    else if(s1.size() < s2.size()) {
+    else if (s1.size() < s2.size()) {
         int diff = s2.length() - s1.length();
         for (int i = 0; i < diff; i++) {
             s1 += '0';
         }
     }
-    if(integer == anotherReal.integer && s1 == s2){
+    if (integer == anotherReal.integer && s1 == s2) {
         return true;
     }
-    else{
+    else {
         return false;
     }
 }
 //size function.
-int BigReal :: size()
+int BigReal::size()
 {
-    return integer.size() + decimal.size();
+    return integer->size() + fraction->size();
 }
 //sign function.
-int BigReal ::sign()
+int BigReal::sign()
 {
     if (signNumber == '+')
     {
@@ -180,7 +254,7 @@ int BigReal ::sign()
 //overloading operator <<.
 ostream& operator << (ostream& out, BigReal num)
 {
-    out << num.integer << "." << num.decimal;
+    out << num.integer->getNumber() << "." << num.fraction->getNumber();
     return out;
 }
 //overload operator >>.
@@ -190,5 +264,8 @@ ostream& operator << (ostream& out, BigReal num)
         num = BigReal(realNumber);
         return in;
 }*/
+
+
+
 
 
