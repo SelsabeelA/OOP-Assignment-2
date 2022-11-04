@@ -27,7 +27,7 @@ BigReal::BigReal(string realnumber) {
     }
     if (realnumber[0] == '+' || realnumber[0] == '-') {
         signNumber = realnumber[0];
-        realnumber.erase(0);
+        realnumber.erase(realnumber.begin());
     }
     string Int = "", frac = "";
     int i = 0;
