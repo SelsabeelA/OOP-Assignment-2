@@ -35,6 +35,9 @@ public:
     friend ostream &operator << (ostream &out, BigDecimalInt num);
     int size();
     int sign();
+    void setsign(char c) {
+        sign = c;
+    }
     void setNumber(string num);
     string getNumber(){
         return number;
