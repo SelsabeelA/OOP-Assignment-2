@@ -253,6 +253,10 @@ int BigReal::sign()
 //overloading operator <<.
 ostream& operator << (ostream& out, BigReal num)
 {
+    if (num.signNumber == '-')
+    {
+        out << num.signNumber;
+    }
     out << num.integer->getNumber() << "." << num.fraction->getNumber();
     return out;
 }
