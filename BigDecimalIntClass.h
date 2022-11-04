@@ -36,7 +36,7 @@ public:
     int size();
     int sign();
     void setsign(char c) {
-        sign = c;
+        signNumber = c;
     }
     void setNumber(string num);
     string getNumber(){
