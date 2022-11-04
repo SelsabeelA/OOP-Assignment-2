@@ -269,6 +269,10 @@ bool BigReal :: operator > (BigReal anotherReal) {
 //operator == overloading function.
 bool BigReal :: operator == (BigReal anotherReal)
 {
+    integer->setsign(signNumber);
+    fraction->setsign(signNumber);
+    anotherReal.integer->setsign(anotherReal.signNumber);
+    anotherReal.fraction->setsign(anotherReal.signNumber);
     string s1 = fraction->getNumber();
     string s2 = anotherReal.fraction->getNumber();
     if (s1.size() > s2.size()) {
@@ -324,7 +328,3 @@ ostream& operator << (ostream& out, BigReal num)
         num = BigReal(realNumber);
         return in;
 }*/
-
-
-
-
