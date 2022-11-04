@@ -40,9 +40,8 @@ BigReal::BigReal(string realnumber) {
         frac += realnumber[i];
         i++;
     }
-    if (Int.size() == 0) {
-        Int = "0";
-    }
+    *integer = Int;
+    *fraction = frac;
 }
 
 BigReal::BigReal(BigDecimalInt bigInteger) {
