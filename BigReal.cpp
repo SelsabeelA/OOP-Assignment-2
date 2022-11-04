@@ -4,7 +4,10 @@ BigReal ::BigReal(double realnumber) {
     string n = to_string(realnumber), Int = "", frac = "";
     if (n[0] == '+' || n[0] == '-') {
         signNumber = n[0];
-        n.erase(0);
+        n.erase(n.begin());
+    }
+    else {
+        signNumber = '+';
     }
     int i = 0;
     while ((i < n.size()) && (n[i] != '.')) {
@@ -29,6 +32,10 @@ BigReal::BigReal(string realnumber) {
         signNumber = realnumber[0];
         realnumber.erase(realnumber.begin());
     }
+   else {
+        signNumber = '+';
+    }
+        
     string Int = "", frac = "";
     int i = 0;
     while ((i < realnumber.size()) && (realnumber[i] != '.')) {
@@ -161,6 +168,10 @@ BigReal BigReal::operator-(BigReal& other) {
 
 //operator < overloading function.
 bool BigReal :: operator < (BigReal anotherReal) {
+    integer->setsign(signNumber);
+    fraction->setsign(signNumber);
+    anotherReal.integer->setsign(anotherReal.signNumber);
+    anotherReal.fraction->setsign(anotherReal.signNumber);
     if (*integer < *anotherReal.integer)
         return true;
     else if (*integer == *anotherReal.integer) {
@@ -186,6 +197,10 @@ bool BigReal :: operator < (BigReal anotherReal) {
 
 //operator > overloading function.
 bool BigReal :: operator > (BigReal anotherReal) {
+    integer->setsign(signNumber);
+    fraction->setsign(signNumber);
+    anotherReal.integer->setsign(anotherReal.signNumber);
+    anotherReal.fraction->setsign(anotherReal.signNumber);
     if (*integer > *anotherReal.integer) {
         return true;
     }
