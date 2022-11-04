@@ -226,7 +226,7 @@ bool BigReal :: operator == (BigReal anotherReal)
             s1 += '0';
         }
     }
-    if (integer == anotherReal.integer && s1 == s2) {
+    if (*integer == *anotherReal.integer && s1 == s2) {
         return true;
     }
     else {
