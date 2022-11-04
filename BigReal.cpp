@@ -32,10 +32,10 @@ BigReal::BigReal(string realnumber) {
         signNumber = realnumber[0];
         realnumber.erase(realnumber.begin());
     }
-   else {
+    else {
         signNumber = '+';
     }
-        
+
     string Int = "", frac = "";
     int i = 0;
     while ((i < realnumber.size()) && (realnumber[i] != '.')) {
@@ -52,7 +52,7 @@ BigReal::BigReal(string realnumber) {
 }
 
 BigReal::BigReal(BigDecimalInt bigInteger) {
-    if (bigInteger.Sign())
+    if (bigInteger.sign())
         signNumber = '+';
     else
         signNumber = '-';
@@ -85,12 +85,12 @@ BigReal& BigReal:: operator=(BigReal&& other)
 {
     signNumber = other.signNumber;
     integer = other.integer;
-    fraction = other.fraction; 
+    fraction = other.fraction;
     other.integer = nullptr;
     other.fraction = nullptr;
     return *this;
 }
- 
+
 
 
 
@@ -118,11 +118,32 @@ BigReal BigReal::operator+ (BigReal& other) {
 
     BigDecimalInt temp1(temporaryInteger + temporaryDecimal);
     BigDecimalInt temp2(temporaryOtherInteger + temporaryOtherDecimal);
+    if(sign() == -1){
+        temp1.setsign('-');
+    }
+    if(other.sign() == -1){
+        temp2.setsign('-');
+    }
 
     string forpushingback = "";
 
     BigDecimalInt sum(temp1 + temp2);
-    string string_sum = sum.getNumber();;
+    if(sum.sign() == 0){
+        result.signNumber = '-';
+    }
+    else{
+        result.signNumber = '+';
+    }
+    string string_sum = sum.getNumber();
+    if(string_sum == "0"){
+        BigReal result(0);
+        return result;
+    }
+    if(string_sum.size() == temporaryDecimal.size()){
+        result.integer = new BigDecimalInt("0");
+        result.fraction = new BigDecimalInt(string_sum);
+        return result;
+    }
     int i = 0;
     for (i; i < temporaryInteger.size(); i++) {
         forpushingback += string_sum[i];
@@ -148,12 +169,33 @@ BigReal BigReal::operator-(BigReal& other) {
 
     BigDecimalInt temp1(temporaryInteger + temporaryDecimal);
     BigDecimalInt temp2(temporaryOtherInteger + temporaryOtherDecimal);
+    if(sign() == -1){
+        temp1.setsign('-');
+    }
+    if(other.sign() == -1){
+        temp2.setsign('-');
+    }
 
     string forpushingback = "";
 
     BigDecimalInt sum(temp1 - temp2);
+    if(sum.sign() == 0){
+        result.signNumber = '-';
+    }
+    else{
+        result.signNumber = '+';
+    }
     string string_sum = sum.getNumber();
     int i = 0;
+    if(string_sum == "0"){
+        BigReal result(0);
+        return result;
+    }
+    if(string_sum.size() == temporaryDecimal.size()){
+        result.integer = new BigDecimalInt("0");
+        result.fraction = new BigDecimalInt(string_sum);
+        return result;
+    }
     for (i; i < temporaryInteger.size(); i++) {
         forpushingback += string_sum[i];
     }
@@ -262,7 +304,7 @@ int BigReal::sign()
     }
     else
     {
-        return 0;
+        return -1;
     }
 }
 //overloading operator <<.
@@ -282,7 +324,6 @@ ostream& operator << (ostream& out, BigReal num)
         num = BigReal(realNumber);
         return in;
 }*/
-
 
 
 
