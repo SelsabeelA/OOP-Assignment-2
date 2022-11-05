@@ -40,7 +40,7 @@ public:
     int sign();
     int size();
     friend ostream& operator << (ostream& out, BigReal num);
-   // friend istream& operator >> (istream& out, BigReal num);
+    friend istream& operator >> (istream& out, BigReal& num);
     ~BigReal() {
 		delete integer;
 		delete fraction;
