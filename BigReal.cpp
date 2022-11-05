@@ -328,9 +328,10 @@ ostream& operator << (ostream& out, BigReal num)
     return out;
 }
 //overload operator >>.
-/*istream& operator >> (istream& in, BigReal num){
-      string realNumber;
-        in >> realNumber;
-        num = BigReal(realNumber);
-        return in;
-}*/
+istream& operator >> (istream& in, BigReal& num){
+    string realNumber;
+    in >> realNumber;
+    BigReal temb(realNumber);
+    num = temb;
+    return in;
+}
