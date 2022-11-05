@@ -23,8 +23,9 @@ BigReal ::BigReal(double realnumber) {
     *fraction = frac;
 }
 BigReal::BigReal(string realnumber) {
-    regex validInput("[-+]?[0-9]*[\.]?[0-9]*");
-    if (!regex_match(realnumber, validInput)) {
+    regex case1("[-+]?[0-9]+"),case2("[-+]?[\\.][0-9]+"),case3("[-+]?[0-9]+[\\.][0-9]+");
+    if ((!regex_match(realnumber, case1))&&
+        (!regex_match(realnumber, case2))&&(!regex_match(realnumber, case3))) {
         cout << "Invalid input\n";
         exit(1);
     }
@@ -35,7 +36,6 @@ BigReal::BigReal(string realnumber) {
     else {
         signNumber = '+';
     }
-
     string Int = "", frac = "";
     int i = 0;
     while ((i < realnumber.size()) && (realnumber[i] != '.')) {
@@ -46,6 +46,12 @@ BigReal::BigReal(string realnumber) {
     while (i < realnumber.size()) {
         frac += realnumber[i];
         i++;
+    }
+    if (frac.size() == 0) {
+        frac = "0";
+    }
+    else if (Int.size()==0) {
+        Int = "0";
     }
     *integer = Int;
     *fraction = frac;
