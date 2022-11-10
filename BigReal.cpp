@@ -145,9 +145,15 @@ BigReal BigReal::operator+ (BigReal& other) {
         BigReal result(0);
         return result;
     }
-    if(string_sum.size() == temporaryDecimal.size()){
+    if(string_sum.size() <= temporaryDecimal.size()){
         result.integer = new BigDecimalInt("0");
-        result.fraction = new BigDecimalInt(string_sum);
+        if(string_sum.size()!=temporaryDecimal.size()){
+            for(int i =0;i<(temporaryDecimal.size()-string_sum.size());i++){
+                forpushingback += "0";
+            }
+        }
+        result.fraction = new BigDecimalInt(forpushingback+string_sum);
+        forpushingback="";
         return result;
     }
     int i = 0;
@@ -197,9 +203,15 @@ BigReal BigReal::operator-(BigReal& other) {
         BigReal result(0);
         return result;
     }
-    if(string_sum.size() == temporaryDecimal.size()){
+    if(string_sum.size() <= temporaryDecimal.size()){
         result.integer = new BigDecimalInt("0");
-        result.fraction = new BigDecimalInt(string_sum);
+        if(string_sum.size()!=temporaryDecimal.size()){
+            for(int i =0;i<(temporaryDecimal.size()-string_sum.size());i++){
+                forpushingback += "0";
+            }
+        }
+        result.fraction = new BigDecimalInt(forpushingback+string_sum);
+        forpushingback="";
         return result;
     }
     for (i; i < temporaryInteger.size(); i++) {
