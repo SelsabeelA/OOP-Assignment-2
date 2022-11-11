@@ -1,145 +1,283 @@
-// FCAI – Object-Oriented Programming 1 – 2022 - Assignment 1
-// Program Name: BigDecimalInt
-// Last Modification Date: 13/10/2022
-// Author1 and ID and Group: Basmala Mohamed Sayed Gad  ID: 20210090 (a, b, c)
-// Author2 and ID and Group: Aya Ali Hassan  ID: 20210083 (d, e)
-// Author3 and ID and Group: Mohamed Ashraf Fahim  ID: 20210329 (f, i, j , k)
-/*
-description: In this problem we developed a new C++ type (class).
-that can hold unlimited decimal integer values and performs arithmetic operations on them.
-such as: +, -, <, and >.
- */
-
-#include "BigDecimalIntClass.h"
-#include "BigReal.h"
-
-
+﻿#include"Bank System.h"
 int main() {
-/*    string n1 = "-34", n2 = "100", n3 = "-500", n4 = "7";
-
-    BigDecimalInt input(n1), input3(n2);
-    BigDecimalInt e = input + input3;
-    BigDecimalInt d = input - input3;
-    cout << "---------TEST ONE---------" << "\n";
-    cout << e;
-    cout << d;
-    cout << (input < input3) << "\n";
-    cout << (input > input3) << "\n";
-    cout << input.Sign() << "\n";
-    cout << input3.size() << "\n";
-
-    BigDecimalInt in(n1), in2(n3);
-    BigDecimalInt a = in + in2;
-    BigDecimalInt b = in - in2;
-    cout << "---------TEST TWO---------" << "\n";
-    cout << a;
-    cout << b;
-    cout << (in < in2) << "\n";
-    cout << (in > in2) << "\n";
-    cout << in2.Sign() << "\n";
-    cout << in.size() << "\n";
-
-    BigDecimalInt input6(n2), input7(n3);
-    BigDecimalInt h = input6 + input7;
-    BigDecimalInt f = input6 - input7;
-    cout << "---------TEST THREE---------" << "\n";
-    cout << h;
-    cout << f;
-    cout << (input6 < input7) << "\n";
-    cout << (input6 > input7) << "\n";
-    cout << input6.Sign() << "\n";
-    cout << input7.size() << "\n";
-
-    BigDecimalInt in1(n4), in3(n2);
-    BigDecimalInt k = in1 + in3;
-    BigDecimalInt l = in1 - in3;
-    cout << "---------TEST FOUR---------" << "\n";
-    cout << k;
-    cout << l;
-    cout << (in1 < in3) << "\n";
-    cout << (in1 > in3) << "\n";
-    cout << in1.Sign() << "\n";
-    cout << in3.size() << "\n";
-
-    BigDecimalInt test0(n3), test11(n3);
-    BigDecimalInt c = test0 + test11;
-    BigDecimalInt g = test0 - test11;
-    cout << "---------TEST FIVE---------" << "\n";
-    cout << c;
-    cout << g;
-    cout << (test0 < test11) << "\n";
-    cout << (test0 > test11) << "\n";
-    cout << test0.Sign() << "\n";
-    cout << test11.size() << "\n";
-
-    BigDecimalInt test(n3), test2(n2);
-    BigDecimalInt j = test + test2;
-    BigDecimalInt i = test - test2;
-    cout << "---------TEST SIX---------" << "\n";
-    cout << j;
-    cout << i;
-    cout << (test < test2) << "\n";
-    cout << (test > test2) << "\n";
-    cout << test.Sign() << "\n";
-    cout << test2.size() << "\n";
-
-    BigDecimalInt test3(n2), test4(n1);
-    BigDecimalInt o = test3 + test4;
-    BigDecimalInt p = test3 - test4;
-    cout << "---------TEST SEVEN---------" << "\n";
-    cout << o;
-    cout << p;
-    cout << (test3 < test4) << "\n";
-    cout << (test3 > test4) << "\n";
-    cout << test3.Sign() << "\n";
-    cout << test4.size() << "\n";
-
-    BigDecimalInt test5(n3), test6(n4);
-    BigDecimalInt q = test5 + test6;
-    BigDecimalInt w = test5 - test6;
-    cout << "---------TEST EIGHT---------" << "\n";
-    cout << q;
-    cout << w;
-    cout << (test5 < test6) << "\n";
-    cout << (test5 > test6) << "\n";
-    cout << test5.Sign() << "\n";
-    cout << test6.size() << "\n";
-
-    BigDecimalInt test7(n3), test8(n1);
-    BigDecimalInt m = test7 + test8;
-    BigDecimalInt n = test7 - test8;
-    cout << "---------TEST NINE---------" << "\n";
-    cout << m;
-    cout << n;
-    cout << (test7 < test8) << "\n";
-    cout << (test7 > test8) << "\n";
-    cout << test7.Sign() << "\n";
-    cout << test8.size() << "\n";
-
-    BigDecimalInt test9(n2), test10(n4);
-    BigDecimalInt x = test9 + test10;
-    BigDecimalInt y = test9 - test10;
-    cout << "---------TEST TEN---------" << "\n";
-    cout << x;
-    cout << y;
-    cout << (test9 < test10) << "\n";
-    cout << (test9 > test10) << "\n";
-    cout << test9.Sign() << "\n";
-    cout << test10.size() << "\n";*/
-    string s1,s2;
-    while(cin>>s1>>s2){
-        BigDecimalInt a(s1),b(s2);
-        cout<<a+b<<endl;
-        cout<<a-b<<endl;
-        cout<<b-a<<endl;
-        cout << (a < b) << "\n";
-        cout << (a > b) << "\n";
-        cout << a.sign() << "\n";
-        cout << b.size() << "\n";
-        cout << a.getNumber() << "\n";
-        a.setNumber("100");
-        cout << a.getNumber() << "\n";
-    }
-
-    return 0;
+	BankingApplication run;
 }
+
+//// FCAI – Programming 1 – 2022
+//// Author: Sama Ahmed
+//#include"iostream"
+//#include<string>
+////#include"C:\\Users\\admin\\source\\repos\\code\\code\\login.cpp"
+//
+////implicit convergent : what the compiler is allowed
+////to do is perform one implicit conversion
+//
+//class Entity {
+//	std::string name;
+//	int age;
+//public:
+//	explicit Entity(const std::string& n):name(n),age(-1){}
+//	explicit Entity(int m):age(m),name("unkown") {}
+//};
+//void printEntity(const Entity& entity) {}
+
+
+/*
+you can write explicit before the constructor when you want
+your constructor to be explicity called insted of allowing thec++
+compiler to implicitly convert any integer into entity by basically
+calling this constructor every time
+*/
+
+//	printEntity(22);//it calls the constructor
+/*
+the compiler will convert from  int to Entity remeber
+that the copiler is allowed to do just one conversion
+so if i printEntity("sama") will get an error as the
+compiler will do two conversion and it's not allowed BUT
+I CAN  printEntity(std::string("sama"))=printEntity(Entity("sa"))
+*/
+
+//namespace app {
+//	void print(const char* c) {
+//		cout<< c<<"app";
+//	}
+//}
+//
+//namespace ap {
+//	namespace func {
+//		void print(const char* c) {
+//			cout << c << "ap";
+//		}
+//	}
+//}
+//
+//int main() {
+////using app::print;  mean in every time print is just written 
+////it will know it's from app namespace
+//	namespace a = app;
+//	a::print("app");//it will be insted of writing app::
+//	ap::func::print("dlkwa");
+//	namespace c = ap::func ;
+//	c::print("dfd");
+//Entity va("sama");//Entity a = "sa";
+//	Entity k = (Entity)77;
+//  //  char a[100];
+////	cin.getline(a);
+//}
+//template<>
+
+
+//struct User {
+//std::string name;
+//
+//	User(string name) {
+//		name = name;
+//	}
+//	void show() {
+//		std::cout << name;
+//	}
+//};
+//struct User {
+//	string name;
+//	User() = default;
+//	User(string name) : name(name) {
+//	}
+//};
+//int main() {
+//	//User u("Michael");
+//	const char* name = "Michael";
+//	User u(name);
+
+	/*User u("sa");
+	u.show();*/
+//#include<fstream>
+//#include<string>
+//
+//
+//void load(const char* filename, double matr[][10], int& row, int& col) {
+//	fstream file;
+//	file.open(filename,ios::in);
+//	if (!file.is_open()) {
+//		cout << "file is not exist";
+//	}
+//	else {
+//		file >> row;
+//		file >> col;
+//		for (int i = 0; i < row; i++) {
+//			for (int j = 0; j < col; j++) {
+//
+//				file >> matr[i][j];
+//			}
+//		}
+//	}
+//}
+//int main() {
+//	double arr[10][10];
+//	const char* name = "data.txt";
+//	int row, col;
+//	load(name, arr, row, col);
+//	
+//}
+//struct Float {
+//	int integer,fraction;
+//	Float(int n = 0, int fr = 0) : integer{ n }, fraction{ abs(fr) } {}
+//};
+//
+//istream& operator>>(istream& my_stream, Float& f) {
+//	char dummy_char;
+//	my_stream >> f.integer >> dummy_char >> f.fraction;
+//	return my_stream;
+//}
+//#include<algorithm>
+//#include<cstdlib>
+//#include<sstream>
+//#include<iomanip>
+//#include<fstream>
+//bool copy1(char* source, char* target) {
+//	ifstream inFile(source);
+//	ofstream outFile(target);
+//	if (!inFile or !outFile)
+//		return false;
+//	while (!inFile.eof())
+//		outFile.put(inFile.get());
+//	return true;
+//}
+//#include<array>
+//template<typename T, int size>
+//array<T, size> fill_zeros(array<T, size>& cpp)
+//{
+//	for (T& element : cpp)
+//	{
+//		element = 0;
+//	}
+//
+//	return cpp;
+//}
+//struct student {
+//	int n;
+//	string name;
+//};
+//struct special {
+//	string id;
+//	student stu;
+//};
+//union dog {
+//	int y;
+//	int v;
+//};
+//#include<string>
+//struct s {
+//	int c;
+//	char g;
+//	s(int b);
+//	void cal();
+//};
+//s::s(int b) {
+//	c = b;
+//}
+//void s::cal() {
+//	if (c != 0) {
+//		g = 'm';
+//		cout << g;
+//	}
+//}
+//#include <iostream>
+//using namespace std;
+//namespace FCAI1 {
+//	void greeting();
+//}
+//namespace FCAI2 {
+//	void greeting();
+//}
+//void bigGreeting();
+//
+//#include"declar.h"
+//int addnum(int num1, int num2) {
+//	int sum = num1 + num2;
+//	std::cout << "jk";
+//	return sum;
+////}
+//#include <iostream>
+//#include <iomanip>
+//#include <vector>
+//#include<fstream>
+
+using namespace std;
+//int main() {
+//	fstream datafile;
+//	datafile.open("saa.txt");
+//}
+
+//#define forevery(item) for (int item
+//#define in(data) : data) {
+//#define print(item, x) cout << item << " "
+//#define endfor }
+//#define println cout<<endl
+//#define square1(x) (x*x)
+//#define square2(x) ((x)*(x))
+
+
+//int main2()
+//{
+
+	//vector<int> data = { 1,2,4,5,5,6 };
+	//cout << 64 / square1(4) << endl; // Expected 4 got 64
+	//cout << 64 / square2(2 + 2) << endl; // Expected 4 got 38
+	// This code uses macros and when expanded, it becomes normal C++
+	/*forevery(item)in(data)
+		item *= 2;
+	print(item, " ");
+	endfor*/
+	//println;
+
+
+	//return 0;
+//}
+//int* get_ptr(&x){
+//	return x;
+//}
+
+
+
+
+//int main() {
+//struct u{
+//public:
+//	union {
+//		float a; 
+//		int b;
+//	};
+//};
+//	u c;
+//	c.b = 97;
+//	cout << c.b<<"    "<<c.a;
+//	float x = 3455.4415;
+//	cout << "\n" << x;
+	//vector<int>v{ 2,4,5,7 };
+	//for_each(v.begin(), v.end(), [](int i) {cout << " " << i;});
+//}
+
+
+
+//reverse double
+
+//#include<iostream>
+//#include<cmath>
+//using namespace std;
+//#include<vector>
+//void reverse(int& k, double arr[])
+//{
+//	for (int i = 0; i < k; i++) {
+//		swap(arr[i], arr[k - 1]);
+//			k--;
+//	}
+//}
+//int main()
+//{
+//	double list[]{ 2.3, 5.6, 6.6, 7.8 };
+//	int n = 4;
+//	reverse(n, list);
+//	cout << list[0];
+//}
+
