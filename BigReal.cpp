@@ -237,18 +237,7 @@ bool BigReal :: operator < (BigReal anotherReal) {
     else if (*integer == *anotherReal.integer) {
         string s1 = fraction->getNumber();
         string s2 = anotherReal.fraction->getNumber();
-        if (s1.size() > s2.size()) {
-            int diff = s1.length() - s2.length();
-            for (int i = 0; i < diff; i++) {
-                s2 += '0';
-            }
-        }
-        else if (s1.size() < s2.size()) {
-            int diff = s2.length() - s1.length();
-            for (int i = 0; i < diff; i++) {
-                s1 += '0';
-            }
-        }
+        add_zeroes(s1, s2);
         return s1 < s2;
     }
     else
@@ -267,18 +256,7 @@ bool BigReal :: operator > (BigReal anotherReal) {
     else if (*integer == *anotherReal.integer) {
         string s1 = fraction->getNumber();
         string s2 = anotherReal.fraction->getNumber();
-        if (s1.size() > s2.size()) {
-            int diff = s1.length() - s2.length();
-            for (int i = 0; i < diff; i++) {
-                s2 += '0';
-            }
-        }
-        else if (s1.size() < s2.size()) {
-            int diff = s2.length() - s1.length();
-            for (int i = 0; i < diff; i++) {
-                s1 += '0';
-            }
-        }
+        add_zeroes(s1, s2);
         return s1 > s2;
     }
     else
@@ -293,18 +271,7 @@ bool BigReal :: operator == (BigReal anotherReal)
     anotherReal.fraction->setsign(anotherReal.signNumber);
     string s1 = fraction->getNumber();
     string s2 = anotherReal.fraction->getNumber();
-    if (s1.size() > s2.size()) {
-        int diff = s1.length() - s2.length();
-        for (int i = 0; i < diff; i++) {
-            s2 += '0';
-        }
-    }
-    else if (s1.size() < s2.size()) {
-        int diff = s2.length() - s1.length();
-        for (int i = 0; i < diff; i++) {
-            s1 += '0';
-        }
-    }
+    add_zeroes(s1, s2);
     if (*integer == *anotherReal.integer && s1 == s2) {
         return true;
     }
