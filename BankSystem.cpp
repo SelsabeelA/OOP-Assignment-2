@@ -1,5 +1,4 @@
 #include"BankSystem.h"
-
 BankAccount::BankAccount() {
     balance = 0;
     string n = to_string(count);
@@ -159,6 +158,7 @@ void BankingApplication::fillData() {
         file.close();
         file.open("data.txt", ios::out);
         file.close();
+        Cases();
     }
     else {
         string type;
@@ -351,5 +351,51 @@ void BankingApplication::DepositMoney() {
         cout << "There is no account with this ID\n";
         exit(1);
     }
+}
+
+void BankingApplication::Cases() {
+    cout << "New accounts have been Created\n";
+    client* newclient = new client("Sama Ahmed", "Giza", "0114233");
+    BankAccount* bank = new BankAccount(2000);
+    newclient->setAccountType("Basic");
+    dataBasic[bank->getAccountID()] = { newclient , bank };
+    client* clnt = new client("Salma Abdelaziz", "Giza", "015753");
+    SavingsBankAccount* account = new SavingsBankAccount(34350, 200);
+    newclient->setAccountType("Saving");
+    dataSaving[account->getAccountID()] = { clnt , account };
+    ListClientsAccounts();
+    cout << "\nfrist test case(On saving bank account) Withdraw (200)from the account of salma\n";
+    dataSaving[account->getAccountID()].second->withdraw(200);
+    printSAccount(dataSaving.begin());
+    cout << "Second test case(On saving bank account)Deposit Money 5000 to salma's account\n";
+    dataSaving[account->getAccountID()].second->deposit(5000);
+    printSAccount(dataSaving.begin());
+    cout << "Third test case(On Basic bank account)Deposit Money 100 to sama's account\n";
+    dataBasic[bank->getAccountID()].second->deposit(56100);
+    printBAccount(dataBasic.begin());
+    cout << "\nfourth test case(On Basic bank account)Withdraw (300)from the account of salma\n";
+    dataBasic[bank->getAccountID()].second->withdraw(300);
+    printBAccount(dataBasic.begin());
+    cout << "New account has been Created\n";
+    client* anotherclient = new client("Selsabeel Asim", "Giza", "0118753");
+    BankAccount* anotherbank = new BankAccount(89900);
+    newclient->setAccountType("Basic");
+    dataBasic[anotherbank->getAccountID()] = { anotherclient , anotherbank };
+    ListClientsAccounts();
+}   
+void BankingApplication:: printBAccount(map<string, pair<client*, BankAccount*>>::iterator it) {
+    string dash(20, '-');
+    cout << dash << "\n";
+    it->second.first->print();
+    cout << "Account ID: " << it->second.second->getAccountID() << " (Basic)\nBalance: " << it->second.second->getBalance();
+    cout << "\n" << dash << "\n";
+}
+void BankingApplication:: printSAccount(map<string, pair<client*, SavingsBankAccount*>>::iterator it) {
+    string dash(20, '-');
+    cout << dash << "\n";
+    it->second.first->print();
+    cout << "Account ID: " << it->second.second->getAccountID() << " (Saving)\nInitial balance: " << it->second.second->getBalance();
+    cout << "\nMinimum Balance: " << it->second.second->getMinimumBalance();
+    cout << "\n" << dash << "\n";
 }
 
