@@ -287,22 +287,3 @@ int main() {
         
     
 }
-void playmanytimes() {
-    int stop = 1;
-    do
-    {
-        GameManager x_o_game;
-        x_o_game.run();
-        system("pause");
-        cout << "\n\nIf you wanna stop playing Enter==>0\n";
-        cin >> stop;
-        /*while (cin.fail())
-        {
-            cin.clear();
-            cin.sync();
-            cin >> stop;
-        }*/
-        cin.clear();
-    } while (stop);
-
-}
