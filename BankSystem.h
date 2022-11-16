@@ -48,14 +48,17 @@ public:
 };
 
 class BankingApplication {
-    map<string, pair<client*, BankAccount*>>dataBasic;
+   map<string, pair<client*, BankAccount*>>dataBasic;
     map<string, pair<client*, SavingsBankAccount*>>dataSaving;
     void fillData();
     void storeData();
     void newAccount();
     void ListClientsAccounts();
+    void printBAccount(map<string, pair<client*, BankAccount*>>::iterator it);
+    void printSAccount(map<string, pair<client*, SavingsBankAccount*>>::iterator it);
     void WithdrawMoney();
     void DepositMoney();
+    void Cases();
 public:
     BankingApplication();
     ~BankingApplication();
