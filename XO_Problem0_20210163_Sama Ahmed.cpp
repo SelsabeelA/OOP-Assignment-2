@@ -145,22 +145,22 @@ char Player::get_symbol() {
 // This class represents a random computer player
 // that generates random positions x y (0 to 2)
 // If invalid, game manager asks to regenerate
-class RandomPlayer : public Player {
+class computerPlayer : public Player {
 public:
     // Take a symbol and pass it to parent
-    RandomPlayer(char symbol);
+    computerPlayer(char symbol);
     // Generate a random move
     void get_move(int& x, int& y);
 };
 // Set player symbol and name as Random Computer Player
-RandomPlayer::RandomPlayer(char symbol) :Player(symbol)
+computerPlayer::computerPlayer(char symbol) :Player(symbol)
 {
     this->name = "Computer Player";
     cout << "My names is " << name << endl;
 }
 
 // Generate a random move
-void RandomPlayer::get_move(int& x, int& y) {
+void computerPlayer::get_move(int& x, int& y) {
     int DigO[3] = { 0 }, rowsO[3] = { 0 }, columnsO[3] = { 0 };
     int emptyR[3] = { 0 }, emptyC[3] = { 0 },emptydig[3];
     int DigX[3] = { 0 }, rowsX[3] = { 0 }, columnsX[3] = { 0 };
@@ -192,13 +192,11 @@ void RandomPlayer::get_move(int& x, int& y) {
             if (chboard[i][j] == 'X'|| chboard[i][j] == 'O')continue;
             if (rowsO[i] == 2|| columnsO[j] == 2 ||((i + j == 2)&&(DigO[2]==2))||
                 ((max(i - j, j - i) == 0)&&DigO[0]==2)) {
-                cout << "Iam o=2 i= " << i << " j= " << j << "\n";
                 owin.first = i; owin.second = j;
             }
             else if (columnsX[j] == 2 || rowsX[i] == 2 ||
                 ((i + j == 2) && (DigX[2] == 2))
                 || ((max(i - j, j - i) == 0)&& DigX[0] == 2)) {
-                cout << "Iam X=2 i= " << i << " j= " << j << "\n";
                 xwin.first = i; xwin.second = j;
             }
             else if((emptyR[i] == 2&&(emptyR[i]+ rowsO[i])==3)||((i+j==2)&&(emptydig[2]==2)&&(emptydig[2]+DigO[2] == 3))||
@@ -256,7 +254,7 @@ void GameManager::run() {
         players[1] = new Player(2, 'o');
     else
         //Player pointer points to child
-        players[1] = new RandomPlayer('o');
+        players[1] = new computerPlayer('o');
 
     x_o.display_board();
     while (true) {
